@@ -11,7 +11,6 @@ router.get('/cars', ensureAuthenticated, (req, res) => {
     let dateFrom = req.query.dateFrom;
     let dateTo = req.query.dateTo;
     let numberOfDays = (new Date(dateTo) - new Date(dateFrom))/(24*60*60*1000) + 1;
-    console.log(numberOfDays);
     car.getAll(dateFrom, dateTo, function (err, rows) {
         if (err) {
             res.send("Something went wrong.")
