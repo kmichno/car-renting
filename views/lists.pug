@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    body
+        .container
+            .row.justify-content-center
+                form(action='/lists/cars', method='GET', class="form-inline")
+                    .col-10
+                        input(type='date', name='dateFrom', class="form-control", style="width: 100%;", placeholder='Date From', value=moment(dateFrom).format('YYYY-MM-DD'))
+                        input(type='date', name='dateTo', class="form-control", style="width: 100%;", placeholder='Date To', value=moment(dateTo).format('YYYY-MM-DD'))
+                    .col-2
+                        input(type='submit', value='Szukaj dostępnych samochodów', class="btn btn-primary")
+            .container.mt-4
+                if rows && rows.length
+                    .list-group
+                        each car in rows
+                            .row.justify-content-center
+                                .col-12
+                                    p.font-weight-bold #{car.name}
+                                    p Zakres: #{dateFrom}-#{dateTo}
+                                    p Ilosc dni: #{numberOfDays}
+                                    p Koszt jednostkowy #{car.price}
+                                    p Koszt całkowity: #{car.price*numberOfDays}
+                                        span.float-right
+                                            form(action='/lists/bookCar/' + car.car_id + '/' + car.price +  '/' + dateFrom + '/' + dateTo,  method="POST")
+                                                button.btn.btn-danger
+                                                    | Rezerwuj
+
+                else
+                    p Wybierz na jaki okres chcesz wypożyczyć samochód!

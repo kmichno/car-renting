@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    body
+        container
+            .row.justify-content-md-center
+                .col-md-6
+                    .card
+                        .card-body
+                            h1.card-title Utwórz konto
+                            form(action='/users/register', method='POST')
+                                #form-group
+                                    label Imię:
+                                    input.form-control(name='name', type='text')
+                                #form-group
+                                    label Email:
+                                    input.form-control(name='email', type='text')
+                                #form-group
+                                    label Nazwa Użytkownika:
+                                    input.form-control(name='username', type='text')
+                                #form-group
+                                    label Hasło:
+                                    input.form-control(name='password', type='password')
+                                #form-group
+                                    label Potwierdź hasło:
+                                    input.form-control(name='password2', type='password')
+                                br
+                                input.btn.btn-primary(type='submit', value='Submit')

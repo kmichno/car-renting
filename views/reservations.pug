@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    body
+        .container
+            .container.mt-4
+                if rows && rows.length
+                    .list-group
+                        each reservation in rows
+                            .row.justify-content-center
+                                .col-12
+                                    a(href="/lists/reservation/" + reservation.reservation_id, class="list-group-item list-group-item-action clearfix")
+                                        | #{reservation.name}
+
+                                    p Zakres: #{moment(reservation.date_from).format('DD.MM.YYYY')}-#{moment(new Date(reservation.date_to)).format('DD.MM.YYYY')}
+                                    p Koszt jednostkowy #{reservation.price}
+                                    p Koszt całkowity: #{reservation.reservation_price}
+                                        span.float-right
+                                            a(href="/lists/reservation/" + reservation.reservation_id, class="btn btn-danger")
+                                                | Modyfikuj rezerwacje
+                                            a(href="/lists/reservation/delete/" + reservation.reservation_id, class="btn btn-danger")
+                                                | Anuluj rezerwacje
+
+                else
+                    p Nie masz jeszcze żadnej listy :(
