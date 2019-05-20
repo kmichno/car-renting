@@ -9,12 +9,15 @@ block content
                         form(action='/lists/reservation/modify/'+reservation.reservation_id+'/'+reservation.price , method='GET', class="form-inline")
                             .col-10
                                 input(type='date', name='dateFrom', class="form-control", style="width: 100%;", placeholder='Date From', value=moment(reservation.date_from).format('YYYY-MM-DD'))
-                                input(type='date', name='dateTo', class="form-control", style="width: 100%;", placeholder='Date To', value=moment(reservation.date_to).format('YYYY-MM-DD'))
+                                input(type='date', name='dateTo', class="form-control mt-2", style="width: 100%;", placeholder='Date To', value=moment(reservation.date_to).format('YYYY-MM-DD'))
                             .col-2
                                 input(type='submit', value='Zmień zakres wypożyczenia', class="btn btn-primary")
+                .row.mt-5
+                    .col-4
                         p Zakres: #{moment(reservation.date_from).format('DD.MM.YYYY')}-#{moment(new Date(reservation.date_to)).format('DD.MM.YYYY')}
+                    .col-4
                         p Koszt jednostkowy #{reservation.price}
                         p Koszt całkowity: #{reservation.reservation_price}
-                            span.float-right
-                                a(href="/lists/reservation/delete/" + reservation.reservation_id, class="btn btn-danger")
+                    .col-4
+                                a(href="/lists/reservation/delete/" + reservation.reservation_id, class="btn btn-danger book-car")
                                     | Anuluj rezerwacje

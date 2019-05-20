@@ -6,8 +6,10 @@ block content
             .row.justify-content-center
                 form(action='/lists/cars', method='GET', class="form-inline")
                     .col-10
-                        input(type='date', name='dateFrom', class="form-control", style="width: 100%;", placeholder='Date From', value=moment(dateFrom).format('YYYY-MM-DD'))
-                        input(type='date', name='dateTo', class="form-control", style="width: 100%;", placeholder='Date To', value=moment(dateTo).format('YYYY-MM-DD'))
+                        .row
+                            input(type='date', name='dateFrom', class="form-control", style="width: 100%;", placeholder='Date From', value=moment(dateFrom).format('YYYY-MM-DD'))
+                        .row
+                            input(type='date', name='dateTo', class="form-control", style="width: 100%;", placeholder='Date To', value=moment(dateTo).format('YYYY-MM-DD'))
                     .col-2
                         input(type='submit', value='Szukaj dostępnych samochodów', class="btn btn-primary")
             .container.mt-4
@@ -17,14 +19,17 @@ block content
                             .row.justify-content-center
                                 .col-12
                                     p.font-weight-bold #{car.name}
+                            .row
+                                .col-4
                                     p Zakres: #{dateFrom}-#{dateTo}
                                     p Ilosc dni: #{numberOfDays}
+                                .col-4
                                     p Koszt jednostkowy #{car.price}
                                     p Koszt całkowity: #{car.price*numberOfDays}
-                                        span.float-right
-                                            form(action='/lists/bookCar/' + car.car_id + '/' + car.price +  '/' + dateFrom + '/' + dateTo,  method="POST")
-                                                button.btn.btn-danger
-                                                    | Rezerwuj
+                                .col-4
+                                        form(action='/lists/bookCar/' + car.car_id + '/' + car.price +  '/' + dateFrom + '/' + dateTo,  method="POST")
+                                            button.btn.btn-danger.book-car
+                                                | Rezerwuj
 
                 else
                     p Wybierz na jaki okres chcesz wypożyczyć samochód!

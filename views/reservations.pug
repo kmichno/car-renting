@@ -9,16 +9,21 @@ block content
                         each reservation in rows
                             .row.justify-content-center
                                 .col-12
-                                    a(href="/lists/reservation/" + reservation.reservation_id, class="list-group-item list-group-item-action clearfix")
+                                    a(href="/lists/reservation/" + reservation.reservation_id, class="clearfix")
                                         | #{reservation.name}
-
+                            .row.mt-2
+                                .col-4
                                     p Zakres: #{moment(reservation.date_from).format('DD.MM.YYYY')}-#{moment(new Date(reservation.date_to)).format('DD.MM.YYYY')}
+                                .col-4
                                     p Koszt jednostkowy #{reservation.price}
                                     p Koszt całkowity: #{reservation.reservation_price}
-                                        span.float-right
+                                .col-4
+                                    .row
+                                        .col-6
                                             a(href="/lists/reservation/" + reservation.reservation_id, class="btn btn-danger")
                                                 | Modyfikuj rezerwacje
-                                            a(href="/lists/reservation/delete/" + reservation.reservation_id, class="btn btn-danger")
+                                        .col-6
+                                            a(href="/lists/reservation/delete/" + reservation.reservation_id, class="btn btn-danger ml-2")
                                                 | Anuluj rezerwacje
 
                 else
